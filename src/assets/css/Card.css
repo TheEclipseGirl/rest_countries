@@ -1,0 +1,27 @@
+.card {
+    width: 21%;
+    height: 380px;
+    overflow: hidden;
+    border-radius: 8px;
+    min-width: 280px;
+}
+.card-img-container{
+    width: 100%;
+    height: 50%;
+    overflow: hidden;
+}
+.card-img-container img{
+    width: 100%;
+    overflow: hidden;
+}
+.card-country-name {
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+.card-details-title{
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+.card-details{
+    font-size: 0.9rem;
+}
