@@ -4,16 +4,17 @@
     overflow: hidden;
     border-radius: 8px;
     min-width: 280px;
-    cursor: pointer;
 }
 .card-img-container{
     width: 100%;
-    height: 50%;
+    height: 90%;
     overflow: hidden;
 }
 .card-img-container img{
     width: 100%;
+    height: 100%;
     overflow: hidden;
+    background-color: black;
 }
 .card-country-name {
     font-weight: bold;

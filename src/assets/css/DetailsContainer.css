@@ -1,0 +1,20 @@
+.back-btn-text{
+    font-size: 0.8rem;
+}
+.back-btn{
+    cursor: pointer;
+    outline: none;
+}
+.country-name{
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+.field-title{
+    font-weight: bold;
+}
+.desc-text{
+    font-size: 0.8rem;
+}
+.border-countries-btn{
+    cursor: pointer;
+}
