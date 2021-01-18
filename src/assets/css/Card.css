@@ -4,6 +4,7 @@
     overflow: hidden;
     border-radius: 8px;
     min-width: 280px;
+    cursor: pointer;
 }
 .card-img-container{
     width: 100%;
