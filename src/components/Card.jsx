@@ -12,6 +12,7 @@ export class Card extends Component {
             capital,
             flag
         } = this.props.country;
+
         return (
             
                 <div className="card p-0 shadow mb-4 ml-2 mr-2">

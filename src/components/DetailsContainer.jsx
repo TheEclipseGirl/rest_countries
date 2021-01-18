@@ -11,13 +11,12 @@ class DetailsContainer extends Component {
     constructor(props) {
         super(props)
         this.state = {
-             country: window.location.pathname.split('/')[2],
+             country: window.location.pathname.split('/')[2].replace('%20', " "),
              countryData:{},
              topLevelDomain: '',
              currencies: '',
              languages: '',
              borderCountryNames: []
-
         }
     }
     
@@ -104,8 +103,7 @@ class DetailsContainer extends Component {
                                             return  <BorderCountries name ={name} key={index}/>
                                         })
                                     }
-                                   
-                                    
+
                                 </div>
                             </div>
                         </div>
