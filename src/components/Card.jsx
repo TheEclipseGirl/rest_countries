@@ -15,7 +15,7 @@ export class Card extends Component {
 
         return (
             
-                <div className="card p-0 shadow mb-4 ml-2 mr-2">
+                <div className="card p-0 shadow mb-4 ml-3 mr-4">
                     <Link to ={{pathname: `/details/${name}`}} style={{height: '50%'}} >
                         <div className="card-img-container p-0">
                             <img src={flag} alt="flag"/>

@@ -1,3 +1,4 @@
+@import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 .home-container{
   background-color: #F0F0F0;
 }

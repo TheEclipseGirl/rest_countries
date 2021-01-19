@@ -31,12 +31,29 @@ import axios from "axios";
         })
     }
 
+    handleRefreshClick = ()=>{
+
+        axios.get(apis.getAllCountries)
+        .then((response)=>{
+            this.setState({
+                data : response.data,
+                country : "",
+                region : ""
+            })
+        })
+        .catch((error)=>{
+            console.log('Error' ,error);
+        })
+    }
+
     handleInputChange = (event)=>{
         this.setState({
             [event.target.name]: event.target.value
         },()=>{
             if(event.target.name === "region"){
-                console.log(apis.getCountriesByRegion + `/${this.state.region}`);
+                this.setState({
+                    country:""
+                })
                 axios.get(apis.getCountriesByRegion + `/${this.state.region}`)
                 .then((response)=>{
                     this.setState({
@@ -54,6 +71,9 @@ import axios from "axios";
         if(event.key !== "Enter"){
             return;
         }
+        this.setState({
+            region:""
+        })
         axios.get(apis.getCountryByName + `/${this.state.country}`)
         .then((response)=>{
             this.setState({ 
@@ -77,6 +97,7 @@ import axios from "axios";
                     handleInputChange = {this.handleInputChange}
                     country = {this.state.country}
                     region = {this.state.region}
+                    handleRefreshClick={this.handleRefreshClick}
                 />
                 <CountryCardContainer data={data}/>
             
