@@ -14,27 +14,36 @@ class DetailsContainer extends Component {
     constructor(props) {
         super(props)
         this.state = {
-             country: window.location.pathname.split('/')[2].replace('%20', " "),
              countryData:{},
              topLevelDomain: '',
              currencies: '',
              languages: '',
-             borderCountryNames: []
+             borderCountryNameAndCode: [],
         }
     }
     
     componentDidMount() {
+        this.updateComponent();
+    }
+
+    componentDidUpdate(prevProps){
+        if(this.props !== prevProps){
+            this.updateComponent();
+        }
+    }
+
+    updateComponent = () => {
         let borderCountries;
-        axios.get(apis.getCountryByName + `/${this.state.country}?fullText=true`)
+        axios.get(apis.getCountryByCode + `/${this.props.match.params.country}`)
         .then((response)=>{
             let topLevelDomain, currencies, languages;
-            topLevelDomain = response.data[0].topLevelDomain.join(", ");
-            currencies = response.data[0].currencies[0].name;
-            languages = response.data[0].languages.map((language) => language.name).join(", ");
-            borderCountries = response.data[0].borders;
+            topLevelDomain = response.data.topLevelDomain.join(", ");
+            currencies = response.data.currencies.name;
+            languages = response.data.languages.map((language) => language.name).join(", ");
+            borderCountries = response.data.borders;
 
           this.setState({
-            countryData:response.data[0],
+            countryData:response.data,
             topLevelDomain,
             currencies,
             languages
@@ -44,28 +53,27 @@ class DetailsContainer extends Component {
             console.log('Error' , error)
         })
         .then(()=>{
-            let borderCountryNames = [] ;
+            let borderCountryNameAndCode = [] ;
             borderCountries.map((code)=>{
                 axios.get(apis.getCountryByCode + `/${code}`)
                 .then((response)=>{
-                    borderCountryNames.push(response.data.name);
-                  
-                    this.setState({
-                        borderCountryNames
-                    })
+                    borderCountryNameAndCode.push({name: response.data.name, code: code});
                 })
                 .catch((error)=>{
                     console.log('Error' ,error);
                 })
+                .then(() => {
+                    this.setState({
+                        borderCountryNameAndCode
+                    })
+                });
                 return null;
             })
         });
-    
-    }
+    } 
 
     render() {
-        const {countryData, topLevelDomain, currencies, languages,borderCountryNames} = this.state;
-
+        const {countryData, topLevelDomain, currencies, languages, borderCountryNameAndCode} = this.state;
         let detailsBg, textColor, btnColor;
         if(this.context === 'light'){
             detailsBg = 'color-light-bg';
@@ -114,11 +122,10 @@ class DetailsContainer extends Component {
                                 <p className={`field-title desc-text ${textColor}`}>Border Countries:  </p>
                                 <div className="d-flex flex-wrap">
                                     { 
-                                        borderCountryNames.map((name,index)=>{
-                                            return  <BorderCountries name ={name} key={index}/>
+                                        borderCountryNameAndCode.map((country,index)=>{
+                                            return  <BorderCountries name ={country.name} code={country.code} key={index}/>
                                         })
                                     }
-
                                 </div>
                             </div>
                         </div>

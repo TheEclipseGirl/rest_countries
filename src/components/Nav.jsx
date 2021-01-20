@@ -32,7 +32,7 @@ class Nav extends React.Component {
                             </>
                             :
                             <>
-                                <i class={`fas fa-sun text-warning`}></i>
+                                <i className={`fas fa-sun text-warning`}></i>
                                 <p className={`p-0 m-0 ml-2 ${textColor}`}> Light Mode</p>
                             </>
                         }

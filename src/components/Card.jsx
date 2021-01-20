@@ -13,7 +13,8 @@ class Card extends Component {
             population,
             region,
             capital,
-            flag
+            flag,
+            alpha3Code
         } = this.props.country;
 
         let cardBg, textColor;
@@ -25,11 +26,10 @@ class Card extends Component {
             cardBg = 'color-dark-bg';
             textColor = 'light'
         }
-
         return (
-            
+
                 <div className={`card p-0 shadow mb-4 ml-3 mr-4 ${cardBg}`}>
-                    <Link to ={{pathname: `/details/${name}`}} style={{height: '50%'}} >
+                    <Link to ={{pathname: `/details/${alpha3Code}`}} style={{height: '50%'}} >
                         <div className="card-img-container p-0">
                             <img src={flag} alt="flag"/>
                         </div>

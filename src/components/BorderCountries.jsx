@@ -18,7 +18,7 @@ import {modeContext} from './modeContext';
 
         return (
             <div>
-                <Link to = {{pathname: `/details/${this.props.name}`}} style={{textDecoration: 'none'}}>
+                <Link to = {{pathname: `/details/${this.props.code}`}} style={{textDecoration: 'none'}}>
                     <div className={`border-countries-btn shadow ml-1 mr-1 pl-2 pr-2 rounded ${btnColor}`}> 
                         <p className={`desc-text ${textColor}`}>{this.props.name}</p>
                     </div>

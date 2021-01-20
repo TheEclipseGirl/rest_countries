@@ -54,11 +54,10 @@ class App extends Component {
                   toggleMode={this.toggleMode}
                 />
               </Route>
-              <Route path="/details/:country">
-                <DetailsContainer
-                  toggleMode={this.toggleMode}
-                />
-              </Route>
+              <Route 
+                path="/details/:country"
+                render={(props) => <DetailsContainer {...props} toggleMode={this.toggleMode}/>}
+              />
           </Switch>
         </Router>
       </modeContext.Provider>

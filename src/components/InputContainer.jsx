@@ -27,13 +27,13 @@ import {modeContext} from './modeContext';
                         <div className={`shadow p-2 col-12 col-md-8 d-flex align-items-center rounded ${inputBg}`}>
                             <i className={`fas fa-search ${textColor}`}></i>
                             <input name="country" className={`outline-none border-0 pl-2 form-control ${textColor} bg-transparent`} onChange={handleInputChange} onKeyPress={handleSearchCountry} value={country} maxLength={30} type="text" placeholder="Search for a country... "/>
-                            <i class={`fas fa-redo-alt ${textColor}`} onClick={handleRefreshClick}></i>
+                            <i className={`fas fa-redo-alt ${textColor}`} onClick={handleRefreshClick}></i>
                         </div>
                     </div>
 
                     <div className={`pr-2 col-4 mb-4 col-md-4 select-container col-lg-2 rounded shadow ${inputBg}`}>
                         <select name="region" className={`outline-none border-0 bg-transparent p-3 ${textColor}`} onChange={handleInputChange} value={region} id="">
-                            <option className={`${inputBg}`} value="" disabled defaultclassName={`${inputBg}`} Value="">Filter by Region</option>
+                            <option className={`${inputBg}`} value="" disabled defaultValue="">Filter by Region</option>
                             <option className={`${inputBg}`} value="africa">Africa</option>
                             <option className={`${inputBg}`} value="americas">Americas</option>
                             <option className={`${inputBg}`} value="asia">Asia</option>
