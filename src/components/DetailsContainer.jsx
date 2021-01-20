@@ -36,9 +36,10 @@ class DetailsContainer extends Component {
         let borderCountries;
         axios.get(apis.getCountryByCode + `/${this.props.match.params.country}`)
         .then((response)=>{
+            console.log('currencies',response.data.currencies);
             let topLevelDomain, currencies, languages;
             topLevelDomain = response.data.topLevelDomain.join(", ");
-            currencies = response.data.currencies.name;
+            currencies = response.data.currencies[0].name;
             languages = response.data.languages.map((language) => language.name).join(", ");
             borderCountries = response.data.borders;
 
