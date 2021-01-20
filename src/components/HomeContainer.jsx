@@ -93,7 +93,7 @@ import {modeContext} from './modeContext';
     render() {
         const { data} = this.state;
 
-        let homeBg , textColor;
+        let homeBg;
         if(this.context === 'light'){
             homeBg = 'color-light-bg';
         }
