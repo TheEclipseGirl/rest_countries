@@ -1,7 +1,5 @@
 @import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-.home-container{
-  background-color: #F0F0F0;
-}
+
 .shadow{
   box-shadow: 1px 1px 8px 0px rgba(0,0, 0, 0.2);
 }
@@ -13,4 +11,21 @@
 }
 .select-container{
   min-width: 217px;
+}
+
+/* Mode */
+.color-light-bg{
+  background-color: white;
+}
+.color-dark-bg {
+  background-color: hsl(209, 23%, 22%);
+}
+.dark{
+  color:hsl(209, 23%, 22%);
+}
+.light{
+  color: white;
+}
+.color-very-dark-bg{
+  background-color: hsl(207, 26%, 17%);
 }

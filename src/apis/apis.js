@@ -5,6 +5,4 @@ export const apis = {
     getCountryByName:`${domain}/name`, // /{name}
     getCountriesByRegion :`${domain}/region`, //{region}
     getCountryByCode : `${domain}/alpha`
-    
 }
-

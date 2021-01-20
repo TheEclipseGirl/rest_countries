@@ -5,8 +5,11 @@ import axios from 'axios'
 import Nav from './Nav';
 import {Link}  from 'react-router-dom';
 import '../assets/css/DetailsContainer.css';
+import {modeContext} from './modeContext';
 
 class DetailsContainer extends Component {
+
+    static contextType = modeContext;
 
     constructor(props) {
         super(props)
@@ -63,40 +66,52 @@ class DetailsContainer extends Component {
     render() {
         const {countryData, topLevelDomain, currencies, languages,borderCountryNames} = this.state;
 
+        let detailsBg, textColor, btnColor;
+        if(this.context === 'light'){
+            detailsBg = 'color-light-bg';
+            textColor = 'dark';
+            btnColor = 'light';
+        }
+        else{
+            detailsBg = 'color-very-dark-bg';
+            textColor = 'light';
+            btnColor = 'color-dark-bg';
+        }
+
         return (
-            <div>
-                <Nav/>
+            <div className={`details ${detailsBg}`}>
+                <Nav toggleMode={this.props.toggleMode}/>
                 <div className="col-11 mx-auto mb-5">
                     <Link to="/">
-                        <button className="back-btn mb-5 mt-5 pl-4 pr-4 shadow border-0 bg-transparent rounded">
-                            <i className="fas fa-long-arrow-alt-left pr-2"></i>
-                            <span className="back-btn-text text-muted">Back</span>
+                        <button className={`back-btn mb-5 mt-5 pl-4 pr-4 shadow border-0 rounded ${btnColor}`}>
+                            <i className={`fas fa-long-arrow-alt-left pr-2 ${textColor}`}></i>
+                            <span className={`back-btn-text ${textColor}`}>Back</span>
                         </button>    
                     </Link>
                     
                     <div className="d-flex flex-column flex-md-row p-0 align-items-md-center">
                         <div className="col-12 col-md-5 p-0 flag-container">
-                            <img className="border col-10" src={countryData.flag} alt="flag"/>
+                            <img className="col-10" src={countryData.flag} alt="flag"/>
                         </div>
                         <div className="col-10 col-md-5 mt-md-0 mt-5">
-                            <p className="country-name">{countryData.name}</p>
+                            <p className={`country-name ${textColor}`}>{countryData.name}</p>
                             <div className="d-column d-md-flex justify-content-between">
                                 <div className="mb-4 mb-md-0">
-                                    <p className="m-0"><span className="field-title desc-text">Native Name: </span><span className="desc-text">{countryData.nativeName}</span></p>
-                                    <p className="m-0"><span className="field-title desc-text">Population: </span><span className="desc-text">{countryData.population}</span></p>
-                                    <p className="m-0"><span className="field-title desc-text">Region: </span><span className="desc-text">{countryData.region}</span></p>
-                                    <p className="m-0"><span className="field-title desc-text">Sub Region: </span><span className="desc-text">{countryData.subregion}</span></p>
-                                    <p className="m-0"><span className="field-title desc-text">Capital: </span><span className="desc-text">{countryData.capital}</span></p>
+                                    <p className={`m-0 ${textColor}`}><span className="field-title desc-text">Native Name: </span><span className="desc-text">{countryData.nativeName}</span></p>
+                                    <p className={`m-0 ${textColor}`}><span className="field-title desc-text">Population: </span><span className="desc-text">{countryData.population}</span></p>
+                                    <p className={`m-0 ${textColor}`}><span className="field-title desc-text">Region: </span><span className="desc-text">{countryData.region}</span></p>
+                                    <p className={`m-0 ${textColor}`}><span className="field-title desc-text">Sub Region: </span><span className="desc-text">{countryData.subregion}</span></p>
+                                    <p className={`m-0 ${textColor}`}><span className="field-title desc-text">Capital: </span><span className="desc-text">{countryData.capital}</span></p>
                                 </div>
                                 <div>
-                                    <p className="m-0"><span className="field-title desc-text">Top Level Domain: </span><span className="desc-text">{topLevelDomain}</span></p>
-                                    <p className="m-0"><span className="field-title desc-text">Currencies: </span><span className="desc-text">{currencies}</span></p>
-                                    <p className="m-0"><span className="field-title desc-text">Languages: </span><span className="desc-text">{languages}</span></p> 
+                                    <p className={`m-0 ${textColor}`}><span className="field-title desc-text">Top Level Domain: </span><span className="desc-text">{topLevelDomain}</span></p>
+                                    <p className={`m-0 ${textColor}`}><span className="field-title desc-text">Currencies: </span><span className="desc-text">{currencies}</span></p>
+                                    <p className={`m-0 ${textColor}`}><span className="field-title desc-text">Languages: </span><span className="desc-text">{languages}</span></p> 
                                 </div>
                             </div>
                             
                             <div className="d-flex align-items-center  mt-5">
-                                <p className="field-title desc-text">Border Countries:  </p>
+                                <p className={`field-title desc-text ${textColor}`}>Border Countries:  </p>
                                 <div className="d-flex flex-wrap">
                                     { 
                                         borderCountryNames.map((name,index)=>{

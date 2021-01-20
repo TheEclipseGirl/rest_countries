@@ -4,9 +4,9 @@ import InputContainer from "./InputContainer";
 import CountryCardContainer from './CountryCardContainer';
 import { apis } from "../apis/apis";
 import axios from "axios";
+import {modeContext} from './modeContext';
+
  class HomeContainer extends Component {
-
-
     constructor(props) {
         super(props)
     
@@ -15,9 +15,11 @@ import axios from "axios";
             data: [],
             searchedCountries:[] ,
             country:"",
-            region:""
+            region:"",
         }
     }
+
+    static contextType = modeContext;
 
     componentDidMount(){
         axios.get(apis.getAllCountries)
@@ -30,6 +32,7 @@ import axios from "axios";
             console.log('Error' ,error);
         })
     }
+
 
     handleRefreshClick = ()=>{
 
@@ -89,19 +92,34 @@ import axios from "axios";
     
     render() {
         const { data} = this.state;
+
+        let homeBg , textColor;
+        if(this.context === 'light'){
+            homeBg = 'color-light-bg';
+        }
+        else{
+            homeBg = 'color-very-dark-bg';
+        }
+
         return (
-            <div className="home-container pb-5">
-                <Nav/>
-                <InputContainer
-                    handleSearchCountry={this.handleSearchCountry} 
-                    handleInputChange = {this.handleInputChange}
-                    country = {this.state.country}
-                    region = {this.state.region}
-                    handleRefreshClick={this.handleRefreshClick}
-                />
-                <CountryCardContainer data={data}/>
             
-            </div>
+                <div className={`pb-5 ${homeBg}`}>
+                   
+                    <Nav
+                        toggleMode = {this.props.toggleMode}
+                       
+                    />
+                    <InputContainer
+                        handleSearchCountry={this.handleSearchCountry} 
+                        handleInputChange = {this.handleInputChange}
+                        country = {this.state.country}
+                        region = {this.state.region}
+                        handleRefreshClick={this.handleRefreshClick}
+                        
+                    />
+                    <CountryCardContainer data={data}/>
+                
+                </div>
         )
     }
 }
