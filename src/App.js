@@ -10,12 +10,12 @@ import HomeContainer from './components/HomeContainer';
 import DetailsContainer from './components/DetailsContainer';
 import { modeContext } from "./components/modeContext";
 
+// import { connect } from "./index";
 
 class App extends Component {
 
   constructor(props) {
     super(props)
-  
     this.state = {
       mode:"light"
     }
@@ -38,7 +38,7 @@ class App extends Component {
   render() {
 
     const {mode} = this.state;
-
+    console.log('App rendered');
     if(mode === 'light'){
       document.body.style.backgroundColor = 'white';
     }else{

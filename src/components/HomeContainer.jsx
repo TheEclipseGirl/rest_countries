@@ -6,13 +6,15 @@ import { apis } from "../apis/apis";
 import axios from "axios";
 import {modeContext} from './modeContext';
 
+import { connect } from "../index";
+import { addCountries } from "../actions";
+
  class HomeContainer extends Component {
     constructor(props) {
         super(props)
     
         this.state = {
             showContainer:"CountryCardContainer",
-            data: [],
             searchedCountries:[] ,
             country:"",
             region:"",
@@ -24,9 +26,7 @@ import {modeContext} from './modeContext';
     componentDidMount(){
         axios.get(apis.getAllCountries)
         .then((response)=>{
-            this.setState({
-                data : response.data
-            })
+            this.props.dispatch(addCountries(response.data));
         })
         .catch((error)=>{
             console.log('Error' ,error);
@@ -39,15 +39,17 @@ import {modeContext} from './modeContext';
         axios.get(apis.getAllCountries)
         .then((response)=>{
             this.setState({
-                data : response.data,
                 country : "",
                 region : ""
             })
+            this.props.dispatch(addCountries(response.data));
         })
         .catch((error)=>{
             console.log('Error' ,error);
         })
     }
+
+
 
     handleInputChange = (event)=>{
         this.setState({
@@ -59,9 +61,7 @@ import {modeContext} from './modeContext';
                 })
                 axios.get(apis.getCountriesByRegion + `/${this.state.region}`)
                 .then((response)=>{
-                    this.setState({
-                        data:response.data
-                    })
+                    this.props.dispatch(addCountries(response.data));
                 }).catch((error)=>{
                     console.log('Error',error)
                 });
@@ -79,9 +79,7 @@ import {modeContext} from './modeContext';
         })
         axios.get(apis.getCountryByName + `/${this.state.country}`)
         .then((response)=>{
-            this.setState({ 
-                data:response.data,
-            })
+            this.props.dispatch(addCountries(response.data));
         })
 
         .catch((error)=>{
@@ -91,7 +89,7 @@ import {modeContext} from './modeContext';
     }
     
     render() {
-        const { data} = this.state;
+        console.log(this.props);
 
         let homeBg;
         if(this.context === 'light'){
@@ -100,7 +98,6 @@ import {modeContext} from './modeContext';
         else{
             homeBg = 'color-very-dark-bg';
         }
-
         return (
             
                 <div className={`pb-5 ${homeBg}`}>
@@ -117,11 +114,17 @@ import {modeContext} from './modeContext';
                         handleRefreshClick={this.handleRefreshClick}
                         
                     />
-                    <CountryCardContainer data={data}/>
+                    <CountryCardContainer/>
                 
                 </div>
         )
     }
 }
 
-export default HomeContainer
+const mapStateToProps = (state) => {
+    return {
+      countries: state.countries
+    }
+}
+
+export default connect(mapStateToProps)(HomeContainer);
