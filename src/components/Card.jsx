@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import '../assets/css/Card.css';
 import {Link} from 'react-router-dom';
-import {modeContext} from './modeContext';
+import { connect } from "../index";
 
 class Card extends Component {
 
-    static contextType = modeContext;
 
     render() {
         const {
@@ -18,7 +17,7 @@ class Card extends Component {
         } = this.props.country;
 
         let cardBg, textColor;
-        if(this.context === 'light'){
+        if(this.props.mode.mode === 'light'){
             cardBg = 'color-light-bg';
             textColor = 'hsl(209, 23%, 22%);'
         }
@@ -56,4 +55,10 @@ class Card extends Component {
     }
 }
 
-export default Card
+const mapStateToProps = (state) => {
+    return {
+      mode: state.mode
+    }
+  }
+
+export default connect(mapStateToProps)(Card);

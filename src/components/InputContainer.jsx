@@ -1,17 +1,14 @@
 import React from 'react';
-import {modeContext} from './modeContext';
-
+import { connect } from "../index";
 
  class InputContainer  extends React.Component {
-
-    static contextType = modeContext;
 
     render(){
 
         const {country , region, handleInputChange,handleSearchCountry,handleRefreshClick} = this.props;
 
             let inputBg ,textColor;
-            if(this.context === 'light'){
+            if(this.props.mode.mode === 'light'){
                 inputBg = 'color-light-bg';
                 textColor = 'hsl(209, 23%, 22%);'
             }
@@ -49,5 +46,10 @@ import {modeContext} from './modeContext';
     }   
     
 }
+const mapStateToProps = (state) => {
+    return {
+      mode: state.mode
+    }
+  }
 
-export default InputContainer
+export default connect(mapStateToProps)(InputContainer)

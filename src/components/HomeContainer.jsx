@@ -4,7 +4,6 @@ import InputContainer from "./InputContainer";
 import CountryCardContainer from './CountryCardContainer';
 import { apis } from "../apis/apis";
 import axios from "axios";
-import {modeContext} from './modeContext';
 
 import { connect } from "../index";
 import { addCountries } from "../actions";
@@ -21,7 +20,7 @@ import { addCountries } from "../actions";
         }
     }
 
-    static contextType = modeContext;
+    // static contextType = modeContext;
 
     componentDidMount(){
         axios.get(apis.getAllCountries)
@@ -89,10 +88,10 @@ import { addCountries } from "../actions";
     }
     
     render() {
-        console.log(this.props);
+        // console.log(this.props);
 
         let homeBg;
-        if(this.context === 'light'){
+        if(this.props.mode.mode === 'light'){
             homeBg = 'color-light-bg';
         }
         else{
@@ -102,10 +101,7 @@ import { addCountries } from "../actions";
             
                 <div className={`pb-5 ${homeBg}`}>
                    
-                    <Nav
-                        toggleMode = {this.props.toggleMode}
-                       
-                    />
+                    <Nav/>
                     <InputContainer
                         handleSearchCountry={this.handleSearchCountry} 
                         handleInputChange = {this.handleInputChange}
@@ -123,7 +119,8 @@ import { addCountries } from "../actions";
 
 const mapStateToProps = (state) => {
     return {
-      countries: state.countries
+      countries: state.countries,
+      mode : state.mode
     }
 }
 

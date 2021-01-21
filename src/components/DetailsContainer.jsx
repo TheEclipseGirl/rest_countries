@@ -5,11 +5,9 @@ import axios from 'axios'
 import Nav from './Nav';
 import {Link}  from 'react-router-dom';
 import '../assets/css/DetailsContainer.css';
-import {modeContext} from './modeContext';
+import { connect } from "../index";
 
 class DetailsContainer extends Component {
-
-    static contextType = modeContext;
 
     constructor(props) {
         super(props)
@@ -76,7 +74,7 @@ class DetailsContainer extends Component {
     render() {
         const {countryData, topLevelDomain, currencies, languages, borderCountryNameAndCode} = this.state;
         let detailsBg, textColor, btnColor;
-        if(this.context === 'light'){
+        if(this.props.mode.mode === 'light'){
             detailsBg = 'color-light-bg';
             textColor = 'dark';
             btnColor = 'light';
@@ -142,4 +140,10 @@ class DetailsContainer extends Component {
     }
 }
 
-export default DetailsContainer;
+const mapStateToProps=(state)=>{
+    return{
+        mode:state.mode
+    }
+}
+
+export default connect(mapStateToProps)(DetailsContainer);

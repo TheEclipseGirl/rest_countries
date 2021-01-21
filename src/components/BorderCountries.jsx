@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom';
-import {modeContext} from './modeContext';
+import { connect } from "../index";
+// import {modeContext} from './modeContext';
 
  class BorderCountries extends Component {
-    static contextType = modeContext;
+    // static contextType = modeContext;
     render() {
 
         let textColor, btnColor;
-        if(this.context === 'light'){
+        if(this.props.mode.mode === 'light'){
             textColor = 'dark';
             btnColor = 'light';
         }
@@ -27,5 +28,10 @@ import {modeContext} from './modeContext';
         )
     }
 }
+ const mapStateToProps =(state)=>{
+    return{
+        mode:state.mode
+    }
+ }
 
-export default BorderCountries
+export default connect(mapStateToProps)(BorderCountries);

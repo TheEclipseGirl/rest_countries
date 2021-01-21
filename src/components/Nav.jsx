@@ -1,14 +1,20 @@
 import React from 'react'
 import "../assets/css/Nav.css";
-import {modeContext} from './modeContext'
+import { connect } from "../index";
+import { toggleMode } from "../actions";
 
 class Nav extends React.Component {
 
-    static contextType = modeContext;
+
+    toggleMode=()=>{
+        this.props.mode.mode === "light" ? 
+        this.props.dispatch(toggleMode("dark")):
+        this.props.dispatch(toggleMode("light"))
+      }
 
     render(){
         let navBg , textColor;
-        if(this.context === 'light'){
+        if(this.props.mode.mode === 'light'){
             navBg = 'color-light-bg';
             textColor = 'dark'
         }
@@ -23,9 +29,9 @@ class Nav extends React.Component {
                     <div>
                        <p className={`nav-heading p-0 m-0 ${textColor}`}> Where in the world? </p>
                     </div>
-                    <div className="d-flex nav-modes align-items-center" onClick={this.props.toggleMode}>
+                    <div className="d-flex nav-modes align-items-center" onClick={this.toggleMode}>
                         {
-                            this.context ==="light" ? 
+                            this.props.mode.mode ==="light" ? 
                             <>
                                 <i className={`far fa-moon ${textColor}`}></i>
                                 <p className={`p-0 m-0 ml-2 ${textColor}`}> Dark Mode</p>
@@ -46,4 +52,9 @@ class Nav extends React.Component {
     
 }
 
-export default Nav
+const mapStateToProps = (state) => {
+    return {
+      mode: state.mode
+    }
+  }
+export default connect(mapStateToProps)(Nav);
